@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kigumi-Dō | Celina Pérez Horta</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+    
+    <style>
+        /* ========================================================
+           ESTILOS BASE - ESTÉTICA EDITORIAL JAPONESA (BLACK & WHITE)
+           ======================================================== */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: #000000;
+            color: #ffffff;
+            font-family: 'Playfair Display', serif;
+            padding: 30px 40px;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* CABECERA SUPERIOR EDITORIAL */
+        .top-nav {
+            width: 100%;
+            max-width: 100%;
+            margin: 0 auto 120px auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-family: 'Inter', sans-serif;
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            padding-bottom: 20px;
+        }
+
+        .brand-zone {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 500;
+            opacity: 0.9;
+        }
+
+        .back-link {
+            text-decoration: none;
+            color: #ffffff;
+            transition: opacity 0.3s ease;
+            font-weight: 500;
+        }
+
+        .back-link:hover {
+            opacity: 0.5;
+        }
+
+        /* CONTENEDOR PRINCIPAL FLUIDO */
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        /* TÍTULOS Y TEXTOS EDITORIALES */
+        .section-title-editorial {
+            font-size: 4.5rem;
+            font-weight: 400;
+            letter-spacing: -2px;
+            margin-bottom: 25px;
+            line-height: 1.1;
+        }
+
+        .paragraph-editorial {
+            font-size: 1.35rem;
+            line-height: 1.8;
+            font-weight: 400;
+            letter-spacing: 0.2px;
+        }
+
+        .paragraph-editorial p {
+            margin-bottom: 25px;
+        }
+
+        /* CONTENEDORES DE IMÁGENES (SISTEMA INTEGRAL SIN RECORTE) */
+        .img-wrapper {
+            background-color: #000000;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            margin-bottom: 40px;
+        }
+
+        .img-wrapper img {
+            width: 100%;
+            height: auto;
+            display: block;
+            object-fit: contain;
+        }
+
+        /* PILAS VERTICALES DE CONTENIDO MULTIPLE */
+        .vertical-blueprint-stack {
+            display: flex;
+            flex-direction: column;
+            gap: 140px; 
+            margin-bottom: 60px;
+        }
+
+        .bloque-editorial {
+            margin-bottom: 180px;
+        }
+
+        .centered-text-block {
+            max-width: 850px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        /* ========================================================
+           ESTILOS ESPECÍFICOS PARA LA NUEVA ESTRUCTURA CREATIVA
+           ======================================================== */
+        
+        /* HERO Y PORTADA */
+        .hero-section {
+            text-align: center;
+            margin-bottom: 180px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            padding-bottom: 100px;
+        }
+
+        .hero-title {
+            font-size: 8.5rem;
+            font-weight: 400;
+            letter-spacing: -4px;
+            line-height: 1;
+            margin-bottom: 25px;
+        }
+
+        .hero-subtitle {
+            font-style: italic;
+            font-size: 2.4rem;
+            opacity: 0.8;
+            margin-bottom: 70px;
+        }
+
+        .intro-text-hero {
+            max-width: 850px;
+            margin: 0 auto;
+            text-align: left;
+        }
+
+        /* CONTROL DE ANCHO COMPLETO PARA LAS SECCIONES DE VIVIENDA */
+        .full-width-viewport {
+            width: 100vw;
+            margin-left: calc(-50vw + 50%);
+            margin-bottom: 60px;
+            padding: 0 40px;
+        }
+
+        /* ESPACIADO ADICIONAL PARA EL ORDEN INVISIBLE */
+        .large-space-box {
+            padding: 100px 0;
+            margin-bottom: 60px;
+        }
+
+        /* EFECTO LUPA / ZOOM INTERACTIVO */
+        img.con-lupa {
+            transition: transform 0.15s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            cursor: zoom-in;
+            will-change: transform, transform-origin;
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 1024px) {
+            body { padding: 20px 20px; }
+            .hero-title { font-size: 4.5rem; letter-spacing: -2px; }
+            .section-title-editorial { font-size: 2.8rem; }
+            .hero-subtitle { font-size: 1.6rem; }
+            .full-width-viewport { padding: 0 20px; }
+            .vertical-blueprint-stack { gap: 80px; }
+            .top-nav { flex-direction: column; gap: 15px; text-align: center; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="top-nav">
+        <div class="brand-zone">
+            <span>✦</span> ARCHITECTURAL DESIGN ARCHIVE - CELINA PÉREZ HORTA
+        </div>
+        <a href="index.html" class="back-link">← VOLVER AL ESPACIO</a>
+    </nav>
+
+    <main class="container">
+
+        <section class="hero-section">
+            <h1 class="hero-title">Kigumi-Dō</h1>
+            <p class="hero-subtitle">Una ciudad suspendida entre el vacío y la comunidad.</p>
+            <div class="paragraph-editorial intro-text-hero">
+                <p>Kigumi-Dō nace de una idea sencilla: construir comunidad sin renunciar a la intimidad. Inspirado en la tradición japonesa del ensamblaje y en los sistemas modulares de crecimiento, el proyecto plantea una arquitectura donde cada vivienda funciona como una pieza autónoma que, al unirse con las demás, construye un organismo mucho mayor. La estructura no impone una única forma de vivir; ofrece un marco abierto capaz de adaptarse al tiempo, a las personas y a las diferentes maneras de habitar.</p>
+            </div>
+        </section>
+
+        <section class="bloque-editorial">
+            <h2 class="section-title-editorial" style="text-align: center; margin-bottom: 80px;">Habitar comienza en una pieza</h2>
+            <div class="vertical-blueprint-stack">
+                <div class="img-wrapper"><img src="kigumido-vivienda-50.png" class="con-lupa" alt="Vivienda de 50 m²"></div>
+                <div class="img-wrapper"><img src="kigumido-vivienda-75.png" class="con-lupa" alt="Vivienda de 75 m²"></div>
+                <div class="img-wrapper"><img src="kigumido-vivienda-85.png" class="con-lupa" alt="Vivienda de 85 m²"></div>
+                <div class="img-wrapper"><img src="kigumido-vivienda-100.png" class="con-lupa" alt="Vivienda de 100 m²"></div>
+            </div>
+            <div class="paragraph-editorial centered-text-block">
+                <p>Antes de existir el edificio, existe la vivienda. Cada módulo responde a una forma distinta de habitar, adaptándose a diferentes necesidades sin perder una misma lógica espacial. Las viviendas no son elementos repetidos; son piezas capaces de combinarse entre sí para construir una arquitectura abierta y flexible.</p>
+            </div>
+        </section>
+
+        <section class="bloque-editorial">
+            <h2 class="section-title-editorial">La sección como experiencia</h2>
+            <div class="full-width-viewport">
+                <div class="img-wrapper">
+                    <img src="kigumido-secciones-viviendas.png" class="con-lupa" alt="Secciones longitudinales de las viviendas modulares">
+                     <img src="kigumido-secciones-viviendas2.png" class="con-lupa" alt="Secciones longitudinales de las viviendas modulares2">
+                </div>
+            </div>
+            <div class="paragraph-editorial" style="max-width: 900px;">
+                <p>Las secciones revelan aquello que las plantas no pueden contar. La relación entre niveles, la entrada de la luz, la continuidad visual y la conexión entre los espacios construyen una forma de habitar donde la verticalidad deja de ser únicamente una cuestión estructural para convertirse en una experiencia cotidiana.</p>
+            </div>
+        </section>
+
+        <section class="bloque-editorial">
+            <h2 class="section-title-editorial" style="text-align: right;">Cuando una vivienda encuentra a otra</h2>
+            <div class="img-wrapper" style="margin-bottom: 60px;">
+                <img src="kigumido-plantas-generales-agregacion.jpg" class="con-lupa" alt="Plantas generales de agregación del edificio">
+            </div>
+            <div class="paragraph-editorial" style="max-width: 850px;">
+                <p>El proyecto crece por ensamblaje. Cada nueva vivienda encuentra su lugar dentro de una estructura compartida donde la repetición nunca genera monotonía, sino diversidad. La arquitectura se construye a partir de relaciones, no de objetos aislados.</p>
+            </div>
+        </section>
+
+        <section class="bloque-editorial">
+            <h2 class="section-title-editorial">Una pequeña ciudad vertical</h2>
+            <div class="vertical-blueprint-stack">
+                <div class="img-wrapper"><img src="kigumido-comunes-espacios-colectivos.jpg" class="con-lupa" alt="Plantas de Espacios Colectivos"></div>
+                <div class="img-wrapper"><img src="kigumido-comunes-comercio.jpg" class="con-lupa" alt="Plantas de Comercio"></div>
+                <div class="img-wrapper"><img src="kigumido-comunes-deportes.jpg" class="con-lupa" alt="Plantas de Deportes"></div>
+                <div class="img-wrapper"><img src="kigumido-comunes-jardines.jpg" class="con-lupa" alt="Plantas de Jardines Suspendidos"></div>
+                <div class="img-wrapper"><img src="kigumido-comunes-aparcamiento.jpg" class="con-lupa" alt="Planta de Aparcamiento"></div>
+            </div>
+            <div class="paragraph-editorial" style="max-width: 900px; margin-top: 40px;">
+                <p>Vivir también significa encontrarse. Entre las viviendas aparecen espacios destinados al intercambio, al descanso y a la actividad cotidiana. El edificio deja de entenderse como un simple bloque residencial para convertirse en un pequeño fragmento de ciudad donde lo doméstico y lo colectivo conviven de manera natural.</p>
+            </div>
+        </section>
+
+        <section class="bloque-editorial">
+            <h2 class="section-title-editorial" style="text-align: center; margin-bottom: 40px;">El orden invisible</h2>
+            <div class="vertical-blueprint-stack large-space-box">
+                <div class="img-wrapper" style="padding: 0 60px;"><img src="kigumido-seccion-general.jpg" class="con-lupa" alt="Sección general técnica"></div>
+                <div class="img-wrapper" style="padding: 0 60px;"><img src="kigumido-alzado-general.jpg" class="con-lupa" alt="Alzado general del conjunto"></div>
+            </div>
+            <div class="paragraph-editorial centered-text-block">
+                <p>Detrás de la complejidad del conjunto existe una estructura precisa que sostiene todo el sistema. La sección y el alzado permiten comprender cómo cada vivienda, cada espacio común y cada elemento estructural forman parte de un único equilibrio donde la repetición genera orden y la variación produce identidad.</p>
+            </div>
+        </section>
+
+        <section class="bloque-editorial" style="margin-bottom: 120px;">
+            <div class="full-width-viewport">
+                <div class="img-wrapper">
+                    <img src="kigumido-panel-general.jpg" class="con-lupa" alt="Panel general completo del proyecto">
+                </div>
+            </div>
+            <div class="paragraph-editorial centered-text-block" style="margin-top: 40px;">
+                <p style="font-style: italic; opacity: 0.85;">Cada decisión, desde la vivienda más pequeña hasta la estructura completa, forma parte de un mismo sistema de relaciones.</p>
+            </div>
+        </section>
+
+        <section class="bloque-editorial">
+            <h2 class="section-title-editorial">Del dibujo a la materia</h2>
+            <div class="img-wrapper" style="border: 1px solid #ffffff; padding: 25px; background-color: #000000; width: 100%; max-width: 1400px; margin: 0 auto 40px auto;">
+                <img src="kigumido-fotografias-maqueta.jpg" class="con-lupa" alt="Fotografías físicas de la maqueta de conjunto">
+            </div>
+            <div class="paragraph-editorial" style="max-width: 850px;">
+                <p>Construir la maqueta permitió comprender el proyecto desde la materia, el peso y la escala. Cada pieza ensamblada reproduce la lógica del edificio real y hace visible aquello que sobre el papel permanece oculto: la relación entre estructura, vacío y comunidad.</p>
+            </div>
+        </section>
+
+        <section class="epilogue-section">
+            <div class="epilogue-text">
+                <p>Kigumi-Dō no propone una forma de vivir. Propone un sistema capaz de adaptarse a todas ellas.</p>
+            </div>
+        </section>
+
+    </main>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const imagesWithZoom = document.querySelectorAll('img.con-lupa');
+            
+            imagesWithZoom.forEach(img => {
+                img.addEventListener('mousemove', (e) => {
+                    const rect = e.target.getBoundingClientRect();
+                    const x = ((e.clientX - rect.left) / rect.width) * 100;
+                    const y = ((e.clientY - rect.top) / rect.height) * 100;
+                    
+                    img.style.transformOrigin = `${x}% ${y}%`;
+                    img.style.transform = 'scale(2.3)'; /* Ajuste de zoom inmersivo para lectura de planos arquitectónicos */
+                });
+
+                img.addEventListener('mouseleave', () => {
+                    img.style.transform = 'scale(1)';
+                    img.style.transformOrigin = 'center center';
+                });
+            });
+        });
+    </script>
+</body>
+</html>

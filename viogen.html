@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VIOGEN | Drawing Space</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap" rel="stylesheet">
+    
+    <style>
+        /* ========================================================
+           ESTILOS GENERALES - ESTÉTICA EDITORIAL PREMIUM (BLACK & WHITE)
+           ======================================================== */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: #000000; /* Fondo negro absoluto */
+            color: #ffffff; /* Letras blancas en todo el documento */
+            font-family: 'Playfair Display', serif; /* Todo unificado con la letra del título */
+            padding-top: 20px;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* ========================================================
+           CABECERA SUPERIOR MINIMALISTA
+           ======================================================== */
+        .header-archive {
+            font-family: 'Playfair Display', serif;
+            font-size: 14px;
+            color: #ffffff;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 40px;
+            margin-bottom: 80px;
+            border-bottom: 1px solid rgb(253, 252, 252); /* Línea sutil blanca */
+        }
+
+        .header-archive div {
+            color: #ffffff;
+            font-weight: 400;
+        }
+
+        .back-link {
+            text-decoration: none;
+            color: #ffffff;
+            font-weight: 500;
+            transition: opacity 0.3s ease;
+        }
+
+        .back-link:hover {
+            opacity: 0.6;
+        }
+
+        /* ========================================================
+           TÍTULOS PRINCIPALES (HERO)
+           ======================================================== */
+        .project-hero {
+            margin-bottom: 100px;
+            border-bottom: 1px solid rgb(255, 255, 255); 
+            padding-bottom: 40px;
+        }
+
+        .viogen-main-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 6.5rem; 
+            font-weight: 400;
+            color: #ffffff;
+            letter-spacing: -2px;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            line-height: 0.9;
+            margin-top: 0;
+        }
+
+        .viogen-subtitle {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.2rem;
+            font-weight: 400;
+            color: #ffffff;
+            line-height: 1.1;
+            margin-bottom: 15px;
+            letter-spacing: -0.5px;
+        }
+
+        .viogen-tagline {
+            font-family: 'Playfair Display', serif;
+            font-style: italic; 
+            font-size: 1.8rem;
+            font-weight: 400;
+            color: #ffffff;
+            margin-bottom: 10px;
+            margin-top: 0;
+            opacity: 0.7;
+        }
+
+        /* ========================================================
+           MENÚ LATERAL FLOTANTE ELEGANTE
+           ======================================================== */
+        .side-nav {
+            position: fixed;
+            bottom: 40px;
+            left: 40px;
+            font-family: 'Playfair Display', serif;
+            font-style: italic;
+            font-size: 14px;
+            line-height: 2;
+            z-index: 100;
+        }
+
+        .side-nav ul {
+            list-style: none;
+        }
+
+        .side-nav a {
+            text-decoration: none;
+            color: #ffffff; 
+            opacity: 0.3; 
+            transition: opacity 0.3s ease, padding-left 0.3s ease;
+        }
+
+        .side-nav a:hover {
+            opacity: 0.8;
+            padding-left: 5px;
+        }
+
+        .side-nav a.active {
+            opacity: 1;
+            font-weight: 500;
+            not-italic;
+        }
+
+        /* ========================================================
+           MAQUETACIÓN DE NARRATIVA E IMÁGENES
+           ======================================================== */
+        .project-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 40px;
+        }
+
+        .narrative-layout {
+            display: grid;
+            grid-template-columns: repeat(12, 1fr);
+            gap: 100px 40px;
+            margin-bottom: 120px;
+        }
+
+        .text-block { 
+            grid-column: span 6; 
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        
+        .image-block {
+            grid-column: span 6;
+            background-color: #0a0a0a;
+            border-radius: 16px; /* Bordes pulidos consistentes */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            width: 100%;
+        }
+
+        .image-block img {
+            width: 100%;
+            height: auto; /* Evita deformaciones y recortes */
+            display: block;
+            object-fit: contain;
+        }
+
+        /* Proporciones de bloques de imagen integrales sin recorte */
+        .wide { grid-column: span 12; height: auto; } 
+        .col-4 { grid-column: span 4; height: auto; } 
+        .col-8 { grid-column: span 8; height: auto; } 
+
+        /* Títulos de bloques intermedios */
+        .section-title {
+            font-family: 'Playfair Display', serif; 
+            color: #ffffff; 
+            font-weight: 400;
+            font-size: 2.2rem;
+            letter-spacing: -0.5px;
+            margin-bottom: 10px;
+            margin-top: 0;
+            line-height: 1.2;
+        }
+
+        .section-subtitle {
+            font-family: 'Playfair Display', serif;
+            font-style: italic;
+            font-size: 1.5rem;
+            color: #ffffff; 
+            margin-bottom: 25px;
+            margin-top: 0;
+            line-height: 1.2;
+            opacity: 0.7;
+        }
+
+        /* Párrafos explicativos elegantes */
+        .section-paragraph {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.35rem;
+            color: #ffffff;
+            font-weight: 400;
+            line-height: 1.8;
+            letter-spacing: 0.2px;
+        }
+
+        .section-paragraph p { 
+            margin-bottom: 20px; 
+            margin-top: 0; 
+        }
+
+        /* ========================================================
+           06. SECCIÓN DE PANEL FINAL (SÍNTESIS)
+           ======================================================== */
+        .final-panel-section {
+            margin-top: 150px;
+            margin-bottom: 120px;
+            padding-top: 60px;
+            border-top: 1px solid rgb(255, 255, 255);
+        }
+
+        .final-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .final-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 4.5rem;
+            color: #ffffff;
+            text-transform: uppercase;
+            letter-spacing: -1px;
+            line-height: 1;
+            margin-bottom: 15px;
+            font-weight: 400;
+        }
+
+        .final-tagline {
+            font-family: 'Playfair Display', serif;
+            font-style: italic;
+            font-size: 1.6rem;
+            color: #ffffff;
+            opacity: 0.7;
+        }
+
+        .panel-frame {
+            position: relative;
+            width: 100%;
+            border: 1px solid rgb(255, 255, 255); 
+            padding: 15px; 
+            background-color: transparent; /* Eliminado fondo blanco que rompía la estética */
+            overflow: hidden;
+            border-radius: 24px;
+        }
+
+        .panel-frame img {
+            width: 100%;
+            height: auto;
+            display: block;
+            object-fit: contain;
+        }
+
+        .panel-code {
+            position: absolute;
+            bottom: 25px;
+            right: 35px;
+            font-family: monospace;
+            font-size: 11px;
+            letter-spacing: 2px;
+            color: #ffffff;
+            background-color: rgba(0, 0, 0, 0.75);
+            padding: 4px 8px;
+            border-radius: 4px;
+        }
+
+        /* ========================================================
+           EFECTO LUPA / ZOOM EN IMÁGENES
+           ======================================================== */
+        .image-block img, .panel-frame img {
+            transition: transform 0.15s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            cursor: zoom-in;
+            will-change: transform, transform-origin;
+        }
+
+        /* ========================================================
+           RESPONSIVE / MÓVILES
+           ======================================================== */
+        @media (max-width: 1000px) {
+            .side-nav { display: none; }
+            .header-archive { padding: 15px 20px; font-size: 12px; }
+            .narrative-layout { grid-template-columns: 1fr; gap: 60px; }
+            .text-block, .image-block, .wide, .col-4, .col-8 { grid-column: span 12; height: auto; }
+            .viogen-main-title { font-size: 4rem; }
+            .viogen-subtitle { font-size: 1.8rem; }
+            .viogen-tagline { font-size: 1.4rem; }
+            .final-title { font-size: 2.5rem; }
+            .final-panel-section { margin-top: 80px; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="side-nav">
+        <ul>
+            <li><a href="#intro" class="nav-item active">00 - Introducción</a></li>
+            <li><a href="#grietas" class="nav-item">01 - Las Grietas</a></li>
+            <li><a href="#ciudad" class="nav-item">02 - Ciudad Oculta</a></li>
+            <li><a href="#mimetismo" class="nav-item">03 - Mimetismo</a></li>
+            <li><a href="#nucleo" class="nav-item">04 - El Núcleo</a></li>
+            <li><a href="#conclusion" class="nav-item">05 - Conclusión</a></li>
+        </ul>
+    </nav>
+
+    <header class="header-archive">
+        <div>ARCHITECTURAL DESIGNE ARCHIVE — CELINA PÉREZ HORTA</div>
+        <a href="index.html" class="back-link">← VOLVER AL ESPACIO </a>
+    </header>
+
+    <main class="project-container">
+
+        <section class="project-hero">
+            <h1 class="viogen-main-title">VIOGEN</h1>
+            <h2 class="viogen-subtitle">LA ARQUITECTURA QUE NO QUIERE SER VISTA</h2>
+            <h3 class="viogen-tagline">Una nueva forma de proteger</h3>
+        </section>
+
+        <div class="narrative-layout">
+
+            <div class="text-block scroll-section" id="intro">
+                <h2 class="section-title">LA ARQUITECTURA QUE NO QUIERE SER VISTA</h2>
+                <h3 class="section-subtitle">Una nueva forma de proteger</h3>
+                <div class="section-paragraph">
+                    <p>La violencia de género obliga a muchas mujeres a desaparecer de su entorno para recuperar su seguridad. Cambian de vivienda, de barrio y, en ocasiones, de identidad. Sin embargo, los espacios destinados a protegerlas siguen siendo reconocibles dentro de la ciudad.</p>
+                    <p>Este proyecto nace de una contradicción: cuanto más visible es el refugio, más vulnerable puede llegar a ser. La propuesta plantea una arquitectura que renuncia a mostrarse.</p>
+                </div>
+            </div>
+
+            <div class="image-block" style="height: 450px;">
+                <img src="render-intro.png" alt="Introducción Viogen">
+            </div>
+
+            <div class="image-block wide">
+                <img src="render-panoramico.png" alt="Vista General Ocultación">
+            </div>
+
+            <div class="text-block scroll-section" id="grietas">
+                <h2 class="section-title">HABITAR ENTRE LAS GRIETAS</h2>
+                <h3 class="section-subtitle">Encontrar refugio en lo que ya existe</h3>
+                <div class="section-paragraph">
+                    <p>La ciudad está llena de espacios olvidados, vacíos y rincones que pasan desapercibidos. Lugares que, pese a formar parte de edificios habitados, permanecen fuera de uso.</p>
+                    <p>El proyecto identifica estos huecos como oportunidades para insertar una nueva capa de arquitectura. No se construye una ciudad nueva. Se ocupa silenciosamente la que ya existe.</p>
+                </div>
+            </div>
+
+            <div class="text-block scroll-section" id="ciudad">
+                <h2 class="section-title">UNA SEGUNDA CIUDAD OCULTA</h2>
+                <h3 class="section-subtitle">Lo que permanece invisible</h3>
+                <div class="section-paragraph">
+                    <p>Desde el exterior nada cambia. Las fachadas siguen siendo las mismas, los accesos continúan funcionando y la vida cotidiana mantiene su ritmo habitual.</p>
+                    <p>Sin embargo, detrás de esa aparente normalidad surge una infraestructura invisible que permite albergar nuevas formas de habitar.</p>
+                </div>
+            </div>
+
+            <div class="image-block col-8">
+                <img src="diagrama-mimetismo.png" alt="Estrategia de Mimetismo">
+            </div>
+
+            <div class="text-block col-4 scroll-section" id="mimetismo">
+                <h2 class="section-title">EL ARTE DE DESAPARECER</h2>
+                <h3 class="section-subtitle">El mimetismo como estrategia</h3>
+                <div class="section-paragraph">
+                    <p>La protección no se alcanza mediante muros más altos o sistemas de seguridad complejos, sino mediante la capacidad de no ser identificado. La arquitectura aprende a esconderse.</p>
+                </div>
+            </div>
+
+            <div class="text-block scroll-section" id="nucleo">
+                <h2 class="section-title">UNA COLUMNA PARA RECONSTRUIR VIDAS</h2>
+                <h3 class="section-subtitle">El núcleo como origen del sistema</h3>
+                <div class="section-paragraph">
+                    <p>La intervención se organiza alrededor de una estructura modular prefabricada de hormigón. Este núcleo actúa simultáneamente como soporte, infraestructura y elemento de conexión.</p>
+                </div>
+            </div>
+
+            <div class="text-block">
+                <h2 class="section-title">EL CORAZÓN OCULTO</h2>
+                <h3 class="section-subtitle">Infraestructura invisible</h3>
+                <div class="section-paragraph">
+                    <p>En el interior del núcleo se concentran todas las instalaciones necesarias para el funcionamiento de las viviendas. Suministros, ventilación, comunicaciones y circulaciones verticales quedan integrados dentro de un único elemento técnico.</p>
+                </div>
+            </div>
+
+            <div class="image-block col-4">
+                <img src="plano-nucleo.png" alt="Plano detalle núcleo">
+            </div>
+            
+            <div class="image-block col-8">
+                <img src="render-interior.png" alt="Interior vivienda modular">
+            </div>
+
+            <div class="text-block scroll-section" id="conclusion">
+                <h2 class="section-title">ESPACIOS QUE RESPIRAN</h2>
+                <h3 class="section-subtitle">La vivienda como organismo adaptable</h3>
+                <div class="section-paragraph">
+                    <p>Las unidades habitacionales se desarrollan a partir de envolventes ligeras vinculadas al núcleo estructural. Su configuración flexible permite responder a diferentes situaciones personales.</p>
+                </div>
+            </div>
+
+            <div class="text-block">
+                <h2 class="section-title">PROTEGER SIN DEJAR HUELLA</h2>
+                <h3 class="section-subtitle">Una arquitectura de la ausencia</h3>
+                <div class="section-paragraph">
+                    <p>Plantea una arquitectura que desaparece para que otras personas puedan volver a aparecer. Una arquitectura que encuentra en la invisibilidad su mayor capacidad de acción.</p>
+                </div>
+            </div>
+
+        </div>
+
+        <section class="final-panel-section">
+            <div class="final-header">
+                <h2 class="final-title">SÍNTESIS: EL RELATO COMPLETO</h2>
+                <p class="final-tagline">La arquitectura del silencio condensada en un único manifiesto gráfico.</p>
+            </div>
+
+            <div class="panel-frame">
+                <img src="panel-final-viogen.png" alt="Panel Final del Proyecto">
+                <div class="panel-code">REF. MATADERO / 2024 / ARCHIVE_01</div>
+            </div>
+        </section>
+
+    </main>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            // 1. Control del menú de navegación lateral (Scroll Spy)
+            const sections = document.querySelectorAll(".scroll-section");
+            const navItems = document.querySelectorAll(".nav-item");
+
+            const observerOptions = {
+                root: null,
+                rootMargin: "-20% 0px -60% 0px",
+                threshold: 0
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        navItems.forEach(item => item.classList.remove("active"));
+                        const id = entry.target.getAttribute("id");
+                        const activeLink = document.querySelector(`.nav-item[href="#${id}"]`);
+                        if (activeLink) {
+                            activeLink.classList.add("active");
+                        }
+                    }
+                });
+            }, observerOptions);
+
+            sections.forEach(section => {
+                observer.observe(section);
+            });
+
+            // 2. Efecto de lupa interactiva optimizado
+            const projectImages = document.querySelectorAll('.image-block img, .panel-frame img');
+            
+            projectImages.forEach(img => {
+                img.addEventListener('mousemove', (e) => {
+                    const rect = e.target.getBoundingClientRect();
+                    const x = ((e.clientX - rect.left) / rect.width) * 100;
+                    const y = ((e.clientY - rect.top) / rect.height) * 100;
+                    
+                    img.style.transformOrigin = `${x}% ${y}%`;
+                    img.style.transform = 'scale(2)'; /* Zoom óptimo para revisión de planos */
+                });
+
+                img.addEventListener('mouseleave', () => {
+                    img.style.transform = 'scale(1)';
+                    img.style.transformOrigin = 'center center';
+                });
+            });
+        });
+    </script>
+</body>
+</html>

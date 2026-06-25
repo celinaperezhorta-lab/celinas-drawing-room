@@ -1,0 +1,954 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Drawing Space | Celina Pérez Horta</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500&family=EB+Garamond:ital,wght@1,400;1,500&family=Inter:wght@400;500;700;800;900&display=swap" rel="stylesheet">
+    
+    <style>
+        /* CONFIGURACIÓN BASE DEL LIENZO */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: #000000;
+            color: #ffffff;
+            font-family: 'Inter', sans-serif;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* CONTENEDORES DE SECCIÓN A PANTALLA COMPLETA */
+        .section-wrapper {
+            width: 100vw;
+            padding: 100px 40px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            position: relative;
+        }
+
+        .bg-black {
+            background-color: #000000;
+            color: #ffffff;
+        }
+
+        /* ========================================================
+           SECCIÓN 2: EL FONDO BLANCO/CREMA CON PUNTITOS TÉCNICOS
+           ======================================================== */
+        .bg-dots-editorial {
+            background-color: #f6f5f0; /* Tono papel de plano */
+            color: #111111;
+            position: relative;
+            border-top: 1px solid rgba(0, 0, 0, 0.1);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+        }
+        
+        /* Trama matemática de puntos limpios */
+        .bg-dots-editorial::before {
+            content: "";
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            pointer-events: none;
+            opacity: 0.15;
+            background-image: radial-gradient(#000000 1.5px, transparent 1.5px);
+            background-size: 24px 24px; /* Cuadrícula técnica espaciada */
+        }
+
+        /* ========================================================
+           SECCIÓN 3: EL FONDO ROSA TEXTURIZADO CON GRANO (ABAJO)
+           ======================================================== */
+        .bg-pink-textured {
+            background-color: #e5b0db; /* El rosa de tu referencia */
+            color: #111111;
+            position: relative;
+        }
+        
+        /* Textura porosa/grano analógico */
+        .bg-pink-textured::before {
+            content: "";
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            pointer-events: none;
+            opacity: 0.38;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+        }
+
+        /* BARRA SUPERIOR DISCRETA */
+        .top-nav {
+            width: calc(100% - 80px);
+            max-width: 1400px;
+            margin: 30px auto 20px auto;
+            display: flex;
+            justify-content: space-between;
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            position: relative;
+            z-index: 2000;
+        }
+
+        .trigger-link {
+            cursor: pointer;
+            transition: opacity 0.3s ease;
+            user-select: none;
+        }
+        .trigger-link:hover {
+            opacity: 0.6;
+        }
+
+        /* BARRITA HORIZONTAL DE PROYECTOS (SUB-NAV) */
+        .projects-subnav {
+            width: calc(100% - 80px);
+            max-width: 1400px;
+            margin: 0 auto 30px auto;
+            border-top: 1px solid rgba(255, 255, 255, 0.2);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+            padding: 15px 0;
+            display: none; 
+            justify-content: center;
+            gap: 40px;
+            background-color: #000000;
+            position: relative;
+            z-index: 1900;
+            animation: slideDown 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+
+        .projects-subnav.active {
+            display: flex;
+        }
+
+        .subnav-link {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.1rem;
+            color: #ffffff;
+            text-decoration: none;
+            transition: opacity 0.3s, transform 0.3s;
+        }
+
+        .subnav-link:hover {
+            opacity: 0.5;
+            font-style: italic;
+        }
+
+        @keyframes slideDown {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* MODAL DE CONTACTO */
+        .contact-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background-color: rgba(0, 0, 0, 0.95);
+            z-index: 5000;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .contact-modal.active {
+            display: flex;
+        }
+
+        .contact-box {
+            background-color: #000000;
+            border: 1.5px solid #ffffff;
+            padding: 50px;
+            max-width: 600px;
+            width: 100%;
+            text-align: center;
+            position: relative;
+        }
+
+        .contact-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 3rem;
+            margin-bottom: 30px;
+        }
+
+        .contact-email {
+            font-family: 'EB Garamond', serif;
+            font-style: italic;
+            font-size: 2rem;
+            color: #ffffff;
+            text-decoration: none;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+            padding-bottom: 5px;
+            display: inline-block;
+            margin-bottom: 40px;
+            transition: opacity 0.3s;
+        }
+
+        .contact-email:hover {
+            opacity: 0.6;
+        }
+
+        .contact-networks {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .contact-networks a {
+            color: #ffffff;
+            text-decoration: none;
+            opacity: 0.6;
+            transition: opacity 0.3s;
+        }
+
+        .contact-networks a:hover {
+            opacity: 1;
+        }
+
+        /* TÍTULO PRINCIPAL */
+        .title-container {
+            text-align: center;
+            margin-top: 40px;
+            margin-bottom: 50px;
+            width: 100%;
+        }
+
+        .main-title-home {
+            font-family: 'Playfair Display', serif;
+            font-style: normal;
+            font-weight: 400;
+            font-size: 8rem;
+            color: #ffffff;
+            letter-spacing: -3px;
+            display: inline-block;
+            background-color: transparent; 
+            box-shadow: none; 
+            border-radius: 0; 
+            padding: 0 0 10px 0; 
+            border-bottom: 1.5px solid #ffffff; 
+            line-height: 0.9;
+        }
+
+        /* EL TICKER */
+        .ticker-container {
+            width: 100vw;
+            border-top: 1.5px solid #ffffff;
+            border-bottom: 1.5px solid #ffffff;
+            padding: 18px 0;
+            overflow: hidden;
+            background-color: #000000;
+        }
+
+        .ticker-wrapper {
+            display: flex;
+            white-space: nowrap;
+            animation: tickerMove 25s linear infinite;
+        }
+
+        .ticker-text {
+            font-family: 'EB Garamond', serif; 
+            font-style: italic;
+            font-size: 1.9rem;
+            font-weight: 400; 
+            text-transform: none; 
+            line-height: 1;
+            padding-right: 50px;
+            color: #ffffff;
+        }
+
+        /* VENTANA DEL CARRUSEL 3D */
+        .gallery-window {
+            width: 100%;
+            height: 620px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            perspective: 1600px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .carousel-3d {
+            width: 300px;
+            height: 400px;
+            position: relative;
+            transform-style: preserve-3d;
+            animation: spin3D 32s linear infinite;
+        }
+
+        .project-card {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            margin-left: -150px;
+            margin-top: -200px;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            text-decoration: none;
+            border: none;
+            background-color: transparent;
+            backface-visibility: visible;
+            filter: brightness(0.95);
+            transition: transform 0.3s ease, filter 0.3s ease; 
+        }
+
+        .gallery-window:hover .carousel-3d {
+            animation-play-state: running;
+        }
+
+        .project-card:hover {
+    filter: brightness(1.1) !important; /* Eliminamos el sepia */
+    box-shadow: inset 0 0 0 2px #e121be; /* Borde rosa sutil */
+    cursor: pointer;
+}
+
+        .p1 { width: 260px; height: 440px; transform: rotateY(0deg) translateZ(520px); }
+        .p2 { width: 380px; height: 260px; transform: rotateY(45deg) translateZ(520px); }
+        .p3 { width: 320px; height: 320px; transform: rotateY(90deg) translateZ(520px); }
+        .p4 { width: 280px; height: 380px; transform: rotateY(135deg) translateZ(520px); }
+        .p5 { width: 420px; height: 240px; transform: rotateY(180deg) translateZ(520px); }
+        .p6 { width: 420px; height: 260px; transform: rotateY(225deg) translateZ(520px); background-size: contain; }
+        .p7 { width: 280px; height: 280px; transform: rotateY(270deg) translateZ(520px); }
+        .p8 { width: 300px; height: 390px; transform: rotateY(315deg) translateZ(520px); }
+
+        /* SECCIÓN DE PRESENTACIÓN */
+        .intro-section {
+            max-width: 1300px;
+            width: 100%;
+            display: grid;
+            grid-template-columns: 1.2fr 1fr; 
+            gap: 80px;
+            position: relative;
+            z-index: 10;
+        }
+
+        .intro-title {
+            font-family: 'Inter', sans-serif;
+            font-weight: 800;
+            font-size: 4.8rem;
+            line-height: 0.95;
+            letter-spacing: -4px;
+            text-transform: uppercase;
+        }
+
+        .intro-text {
+            font-family: 'EB Garamond', serif;
+            font-size: 1.5rem;
+            line-height: 1.6;
+            font-weight: 400;
+        }
+
+        .intro-text p {
+            margin-bottom: 30px;
+        }
+
+        .intro-meta {
+            margin-top: 50px;
+            display: flex;
+            gap: 40px;
+            font-family: 'Inter', sans-serif;
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .bg-dots-editorial .intro-meta { 
+            color: #111111; 
+            border-top: 1px solid rgba(0,0,0,0.15);
+            padding-top: 30px;
+        }
+
+        /* MOSAICO ASIMÉTRICO DE ARCHIVO */
+        .drawing-archive-mosaic {
+            max-width: 1400px;
+            width: 100%;
+            display: grid;
+            grid-template-columns: repeat(12, 1fr);
+            gap: 25px;
+            margin-top: 60px;
+            position: relative;
+            z-index: 5;
+        }
+
+        .mosaic-item::after {
+    content: "";
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background-color: #f485df; /* Tu rosa característico */
+    opacity: 0;
+    mix-blend-mode: multiply; /* Fusiona el rosa con las líneas negras */
+    transition: opacity 0.3s ease;
+    pointer-events: none;
+}
+
+.mosaic-item:hover::after {
+    opacity: 0.65; /* Se vuelve rosa translúcido al interactuar */
+}
+        }
+
+        .mosaic-item img {
+            width: 100%;
+            height: auto;
+            display: block;
+            object-fit: cover;
+            filter: grayscale(0.7) contrast(2.05);
+            transition: filter 0.3s ease;
+        }
+
+        .mosaic-item:hover img {
+            filter: grayscale(0) contrast(1);
+        }
+
+        .mosaic-item.span-3 { grid-column: span 3; }
+        .mosaic-item.span-4 { grid-column: span 4; }
+        .mosaic-item.span-6 { grid-column: span 6; }
+        .mosaic-item.span-9 { grid-column: span 9; }
+
+        .massive-technical-title {
+            font-family: 'Inter', sans-serif;
+            font-weight: 900;
+            font-size: 9.5rem;
+            letter-spacing: -7px;
+            line-height: 0.85;
+            text-transform: uppercase;
+            color: #111111;
+            margin-bottom: 40px;
+            text-align: left;
+            width: 100%;
+            position: relative;
+            z-index: 5;
+        }
+
+        /* ========================================================
+           ELEMENTOS ADICIONALES DEL FOOTER (ESTILO MINIMALISTA)
+           ======================================================== */
+        .site-footer {
+            max-width: 1400px;
+            width: 100%;
+            margin-top: 120px;
+            padding-top: 50px;
+            border-top: 1.5px solid #111111;
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr;
+            gap: 50px;
+            position: relative;
+            z-index: 10;
+            font-family: 'Inter', sans-serif;
+            color: #111111;
+        }
+
+        .footer-branding h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.2rem;
+            font-weight: 400;
+            margin-bottom: 10px;
+        }
+
+        .footer-branding p {
+            font-size: 12px;
+            opacity: 0.7;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .footer-nav-block h4 {
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 20px;
+            opacity: 0.4;
+        }
+
+        .footer-links {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .footer-links button, .footer-links a {
+            background: none;
+            border: none;
+            text-align: left;
+            font-family: 'Inter', sans-serif;
+            font-size: 14px;
+            color: #111111;
+            text-decoration: none;
+            cursor: pointer;
+            width: fit-content;
+            transition: opacity 0.3s, transform 0.2s;
+        }
+
+        .footer-links button:hover, .footer-links a:hover {
+            opacity: 0.5;
+            transform: translateX(4px);
+        }
+
+        .footer-bottom-bar {
+            grid-column: span 3;
+            margin-top: 60px;
+            padding-top: 30px;
+            border-top: 1px solid rgba(0,0,0,0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            opacity: 0.7;
+        }
+
+        .back-to-top-btn {
+            background: none;
+            border: none;
+            font-family: 'Inter', sans-serif;
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            cursor: pointer;
+            color: #111111;
+        }
+        .back-to-top-btn:hover {
+            text-decoration: underline;
+        }
+
+        /* MODAL INTERACTIVO PARA EL CV */
+        .cv-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background-color: rgba(0, 0, 0, 0.98); 
+            z-index: 10000;
+            display: none; 
+            overflow-y: auto;
+            padding: 60px 40px;
+            color: #ffffff;
+        }
+
+        .cv-modal.active {
+            display: block;
+        }
+
+        .cv-container {
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .cv-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            border-bottom: 1.5px solid #ffffff;
+            padding-bottom: 40px;
+            margin-bottom: 60px;
+        }
+
+        .cv-name {
+            font-family: 'Playfair Display', serif;
+            font-size: 4rem;
+            font-weight: 400;
+            line-height: 1;
+            letter-spacing: -1px;
+        }
+
+        .cv-title-sub {
+            font-family: 'EB Garamond', serif;
+            font-style: italic;
+            font-size: 1.6rem;
+            margin-top: 10px;
+            opacity: 0.8;
+        }
+
+        .close-cv-btn {
+            background: none;
+            border: none;
+            color: #ffffff;
+            font-family: 'Inter', sans-serif;
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            cursor: pointer;
+            padding: 10px 20px;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            transition: all 0.3s;
+        }
+
+        .close-cv-btn:hover {
+            background-color: #ffffff;
+            color: #000000;
+        }
+
+        .cv-layout-with-photo {
+            display: grid;
+            grid-template-columns: 320px 1fr;
+            gap: 60px;
+        }
+
+        .cv-photo-wrapper {
+            width: 100%;
+        }
+
+        .cv-photo-wrapper img {
+            width: 100%;
+            height: auto;
+            display: block;
+            object-fit: contain;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .cv-grid {
+            display: grid;
+            grid-template-columns: 1fr 3fr;
+            gap: 40px 40px;
+        }
+
+        .cv-section-label {
+            font-family: 'Inter', sans-serif;
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            opacity: 0.5;
+            padding-top: 6px;
+        }
+
+        .cv-block {
+            margin-bottom: 35px;
+        }
+
+        .cv-item-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            font-weight: 400;
+            margin-bottom: 5px;
+        }
+
+        .cv-item-meta {
+            font-family: 'Inter', sans-serif;
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            opacity: 0.7;
+            margin-bottom: 12px;
+        }
+
+        .cv-item-desc {
+            font-family: 'EB Garamond', serif;
+            font-size: 1.25rem;
+            line-height: 1.5;
+            opacity: 0.9;
+        }
+
+        .cv-skills-list {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            font-family: 'EB Garamond', serif;
+            font-size: 1.3rem;
+        }
+
+        /* ANIMACIONES */
+        @keyframes tickerMove {
+            0% { transform: translate3d(0, 0, 0); }
+            100% { transform: translate3d(-50%, 0, 0); }
+        }
+
+        @keyframes spin3D {
+            from { transform: rotateY(0deg); }
+            to { transform: rotateY(360deg); }
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 1024px) {
+            .intro-section { grid-template-columns: 1fr; gap: 40px; }
+            .intro-title { font-size: 3rem; letter-spacing: -2px; }
+            .main-title-home { font-size: 4.5rem; }
+            .cv-layout-with-photo { grid-template-columns: 1fr; gap: 40px; }
+            .cv-photo-wrapper { max-width: 280px; margin: 0 auto; }
+            .cv-grid { grid-template-columns: 1fr; gap: 15px; }
+            .massive-technical-title { font-size: 4rem; letter-spacing: -3px; }
+            .drawing-archive-mosaic { grid-template-columns: repeat(2, 1fr); gap: 15px; }
+            .mosaic-item.span-3, .mosaic-item.span-4, .mosaic-item.span-6, .mosaic-item.span-9 { grid-column: span 1; }
+            .site-footer { grid-template-columns: 1fr; gap: 30px; }
+            .footer-bottom-bar { grid-column: span 1; flex-direction: column; gap: 15px; text-align: center; }
+        }
+
+        @media (max-width: 768px) {
+            .top-nav { width: calc(100% - 40px); }
+            .projects-subnav { gap: 15px; flex-wrap: wrap; padding: 10px; width: calc(100% - 40px); }
+            .subnav-link { font-size: 0.95rem; }
+            .section-wrapper { padding: 60px 20px; }
+            .cv-skills-list { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="top-nav">
+        <div class="trigger-link" onclick="abrirCV()">Celina Pérez Horta</div>
+        <div>
+            <span class="trigger-link" onclick="alternarBarraProyectos()">Proyectos</span> / 
+            <span class="trigger-link" onclick="abrirCV()">Sobre Mí</span> / 
+            <span class="trigger-link" onclick="abrirContacto()">Contacto</span>
+        </div>
+    </nav>
+
+    <div id="projectsSubnavContainer" class="projects-subnav">
+        <a href="viogen.html" class="subnav-link">Viogen</a>
+        <a href="vayatela.html" class="subnav-link">Vaya Tela</a>
+        <a href="colonizacionsimbiotica.html" class="subnav-link">Colonización Simbiótica</a>
+        <a href="kigumido.html" class="subnav-link">Kigumido</a>
+        <a href="Kagenoniwa.html" class="subnav-link">Kage No Niwa</a>
+    </div>
+
+    <div id="contactModalContainer" class="contact-modal" onclick="cerrarContactoPorFuera(event)">
+        <div class="contact-box">
+            <button class="close-cv-btn" style="position: absolute; top: 20px; right: 20px;" onclick="cerrarContacto()">✕</button>
+            <h2 class="contact-title">Contacto</h2>
+            <a href="mailto:celina.perezhorta@gmail.com" class="contact-email">celina.perezhorta@gmail.com</a>
+            <div class="contact-networks">
+                <a href="#" target="_blank">LinkedIn</a>
+                <a href="#" target="_blank">Instagram</a>
+                <a href="#" target="_blank">Issuu</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="section-wrapper bg-black" style="padding-top: 20px; padding-bottom: 20px;">
+        <div class="title-container">
+            <h1 class="main-title-home">Celina's Drawing Room</h1>
+        </div>
+
+        <div class="ticker-container">
+            <div class="ticker-wrapper">
+                <div class="ticker-text">Architecture & Design Student ✦ Architectural Design Archive ✦ Drawing Space ✦ </div>
+                <div class="ticker-text">Architecture & Design Student ✦ Architectural Design Archive ✦ Drawing Space ✦ </div>
+                <div class="ticker-text">Architecture & Design Student ✦ Architectural Design Archive ✦ Drawing Space ✦ </div>
+                <div class="ticker-text">Architecture & Design Student ✦ Architectural Design Archive ✦ Drawing Space ✦ </div>
+            </div>
+        </div>
+
+        <div class="gallery-window">
+            <div class="carousel-3d">
+                <a href="viogen.html" class="project-card p1" style="background-image: url('viogen-portada.png');"></a>
+                <a href="vayatela.html" class="project-card p2" style="background-image: url('vayatela-portada.jpg');"></a>
+                <a href="colonizacionsimbiotica.html" class="project-card p3" style="background-image: url('colonizacionsimbiotica-portada.jpg');"></a>
+                <a href="kigumido.html" class="project-card p4" style="background-image: url('kigumido-portada.png');"></a>
+                <a href="kagenoniwa.html" class="project-card p5" style="background-image: url('kagenoniwa-portada.png');"></a>
+                <a href="proyecto6.html" class="project-card p6" style="background-image: url('lepidopteros-portada.jpg');"></a>
+                <a href="proyecto7.html" class="project-card p7" style="background-image: url('proyecto7-portada.jpg');"></a>
+                <a href="proyecto8.html" class="project-card p8" style="background-image: url('proyecto8-portada.jpg');"></a>
+            </div>
+        </div>
+    </div>
+
+    <div class="section-wrapper bg-dots-editorial">
+        <section class="intro-section">
+            
+            <h2 class="intro-title">
+                Explorando los límites entre la materia, el vacío y la representación visual.
+            </h2>
+            
+            <div class="intro-text">
+                <p>
+                   No entiendo la arquitectura como una colección de edificios, sino como una forma de observar el mundo.
+                   Para mí, proyectar es aprender a mirar. Descubrir relaciones donde aparentemente no existen, encontrar belleza en lo cotidiano y plantear preguntas sobre la manera en que habitamos los espacios que nos rodean.
+                </p>
+                <p>
+                    Este espacio reúne dibujos, ideas, procesos, errores, intuiciones y proyectos que han ido construyendo mi manera de pensar. No es una recopilación de resultados finales, sino un archivo de búsquedas. Cada página representa un momento distinto dentro de un recorrido que sigue abierto.
+                </p>
+                <p>
+                    Me interesa la arquitectura que provoca emociones antes que respuestas. La que trabaja con la luz, el tiempo, la memoria y las personas. La que entiende que un espacio no se define únicamente por sus dimensiones o sus materiales, sino también por las experiencias que es capaz de generar.
+                </p>
+                <p>
+                    A lo largo de este portfolio conviven escalas, programas y contextos muy distintos. Desde intervenciones urbanas que exploran nuevas formas de convivencia hasta refugios concebidos desde la intimidad y la protección.
+                </p>
+                <p>
+                    Bienvenido a Celina's Drawing Room. Un archivo vivo y en constante transformación donde las ideas encuentran un lugar para existir antes de convertirse en realidad.
+                </p>
+                
+                <div class="intro-meta">
+                    <div class="trigger-link" onclick="abrirCV()" style="border-bottom: 1px solid #000; padding-bottom: 2px;"><strong>Estudiante</strong><br>Celina Pérez Horta (Ver CV)</div>
+                    <div><strong>Ubicación</strong><br>Madrid, España</div>
+                    <div class="trigger-link" onclick="abrirContacto()"><strong>Contacto</strong><br>Celina.perezhorta@gmail.com</div>
+                </div>
+            </div>
+
+        </section>
+    </div>
+
+    <div class="section-wrapper bg-pink-textured" style="padding-top: 60px; padding-bottom: 40px;">
+        <h2 class="massive-technical-title">Technical<br>Drawing Archive</h2>
+        
+        
+
+        <footer class="site-footer">
+            <div class="footer-branding">
+                <h3>Celina's Drawing Room</h3>
+                <p>Architectural Design & Visual Narrative Archive</p>
+            </div>
+            
+            <div class="footer-nav-block">
+                <h4>Navegación</h4>
+                <ul class="footer-links">
+                    <li><button onclick="abrirCV()">About Me (Sobre Mí)</button></li>
+                    <li><button onclick="alternarBarraProyectos()">Projects Archive</button></li>
+                    <li><button onclick="abrirContacto()">Contact (Contacto)</button></li>
+                </ul>
+            </div>
+
+            <div class="footer-nav-block">
+                <h4>Legal & Redes</h4>
+                <ul class="footer-links">
+                    <li><a href="#" target="_blank">Instagram</a></li>
+                    <li><a href="#" target="_blank">LinkedIn</a></li>
+                    <li><a href="#">Privacy Policy</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-bottom-bar">
+                <div>&copy; 2026 Celina Pérez Horta. Hecho en Madrid, España.</div>
+                <div><button class="back-to-top-btn" onclick="window.scrollTo({top: 0, behavior: 'smooth'});">Back to Top ↑</button></div>
+            </div>
+        </footer>
+    </div>
+
+    <div id="cvModalContainer" class="cv-modal">
+        <div class="cv-container">
+            
+            <div class="cv-header">
+                <div>
+                    <h1 class="cv-name">Celina Pérez Horta</h1>
+                    <p class="cv-title-sub">Doble Grado en Fundamentos de la Arquitectura y Diseño</p>
+                </div>
+                <button class="close-cv-btn" onclick="cerrarCV()">Cerrar ✕</button>
+            </div>
+
+            <div class="cv-layout-with-photo">
+                
+                <div class="cv-photo-wrapper">
+                    <img src="tu-foto-cv.png" alt="Fotografía Celina Pérez Horta">
+                </div>
+
+                <div class="cv-grid">
+                    <div class="cv-section-label">Educación</div>
+                    <div>
+                        <div class="cv-block">
+                            <h3 class="cv-item-title">Doble Grado en Fundamentos de la Arquitectura y Diseño</h3>
+                            <p class="cv-item-meta">Universidad Europea de Madrid — 2021 - Presente</p>
+                            <p class="cv-item-desc">Formación integral híbrida orientada tanto a la complejidad del diseño del espacio, estructuras y urbanismo como a la investigación conceptual del diseño gráfico, industrial y de la narrativa visual.</p>
+                        </div>
+                    </div>
+
+                    <div class="cv-section-label">Experiencia</div>
+                    <div>
+                        <div class="cv-block">
+                            <h3 class="cv-item-title">Diseño de Proyectos & Producción Gráfica</h3>
+                            <p class="cv-item-meta">Proyectos Académicos Destacados & Freelance — 2023 - 2026</p>
+                            <p class="cv-item-desc">Modelado tridimensional analítico y conceptual. Creación de narrativas visuales complejas a través de renders artísticos, axonometrías explotadas y planimetría técnica con alto nivel estético.</p>
+                        </div>
+                    </div>
+
+                    <div class="cv-section-label">Software</div>
+                    <div>
+                        <div class="cv-block">
+                            <div class="cv-skills-list">
+                                <div>✦ Rhinoceros 3D / Grasshopper</div>
+                                <div>✦ Autodesk AutoCAD</div>
+                                <div>✦ Adobe Photoshop / Illustrator</div>
+                                <div>✦ Adobe InDesign (Editorial)</div>
+                                <div>✦ D5 Render / Enscape </div>
+                                <div>✦ Modelado BIM (Revit)</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="cv-section-label">Idiomas & Info</div>
+                    <div>
+                        <div class="cv-block">
+                            <div class="cv-skills-list">
+                                <div><strong>Español:</strong> Nativo</div>
+                                <div><strong>Inglés:</strong> Avanzado (C1)</div>
+                                <div><strong>Contacto:</strong> celina.perezhorta@gmail.com</div>
+                                <div><strong>Localización:</strong> Madrid, España</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+    <script>
+        // --- LOGICA DE PROYECTOS ---
+        function alternarBarraProyectos() {
+            const subnav = document.getElementById('projectsSubnavContainer');
+            subnav.classList.toggle('active');
+            cerrarContacto();
+            cerrarCV();
+        }
+
+        function cerrarBarraProyectos() {
+            document.getElementById('projectsSubnavContainer').classList.remove('active');
+        }
+
+        // --- LOGICA DE CONTACTO ---
+        function abrirContacto() {
+            document.getElementById('contactModalContainer').classList.add('active');
+            cerrarBarraProyectos();
+            cerrarCV();
+            document.body.style.overflow = 'hidden';
+        }
+
+        function cerrarContacto() {
+            document.getElementById('contactModalContainer').classList.remove('active');
+            document.body.style.overflowY = 'scroll';
+        }
+
+        function cerrarContactoPorFuera(e) {
+            if (e.target.id === 'contactModalContainer') {
+                cerrarContacto();
+            }
+        }
+
+        // --- LOGICA DEL CV ---
+        function abrirCV() {
+            document.getElementById('cvModalContainer').classList.add('active');
+            cerrarBarraProyectos();
+            cerrarContacto();
+            document.body.style.overflow = 'hidden';
+        }
+
+        function cerrarCV() {
+            document.getElementById('cvModalContainer').classList.remove('active');
+            document.body.style.overflowY = 'scroll';
+            document.body.style.overflowX = 'hidden';
+        }
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                cerrarCV();
+                cerrarContacto();
+                cerrarBarraProyectos();
+            }
+        });
+    </script>
+
+</body>
+</html>

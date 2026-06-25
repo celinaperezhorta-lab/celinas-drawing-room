@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vaya Tela! | Celina Pérez Horta</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap" rel="stylesheet">
+    
+    <style>
+        /* ========================================================
+           ESTILOS BASE - ESTREMA ELEGANCIA EDITORIAL UNIFICADA
+           ======================================================== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: #000000; /* Fondo negro absoluto */
+            color: #ffffff; /* Letras blancas en todo el documento */
+            font-family: 'Playfair Display', serif; /* TODO con la letra del título */
+            overflow-x: hidden;
+            padding: 40px 20px;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* CABECERA MINIMALISTA */
+        .top-nav {
+            max-width: 1400px;
+            margin: 0 auto 100px auto;
+            display: flex;
+            justify-content: space-between;
+            font-size: 14px;
+            color: #ffffff;
+            font-family: 'Playfair Display', serif;
+        }
+
+        .back-link {
+            text-decoration: none;
+            color: #ffffff;
+            transition: opacity 0.3s;
+        }
+
+        .back-link:hover {
+            opacity: 0.6;
+        }
+
+        /* CONTENEDOR FLUIDO */
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        /* TÍTULOS DE SECCIÓN */
+        .section-title-editorial {
+            font-family: 'Playfair Display', serif;
+            font-size: 5rem;
+            font-weight: 400;
+            letter-spacing: -2px;
+            margin-bottom: 15px;
+            line-height: 1.1;
+            color: #ffffff;
+        }
+
+        /* SUBTÍTULOS (Ahora idénticos en estilo serif, finos y elegantes) */
+        .section-subtitle-editorial {
+            font-family: 'Playfair Display', serif;
+            font-style: italic;
+            font-size: 1.8rem;
+            color: #ffffff; 
+            margin-bottom: 40px;
+            font-weight: 400;
+        }
+
+        /* PÁRRAFOS EXPLICATIVOS CON LA LETRA DEL TÍTULO */
+        .paragraph-editorial {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.35rem; /* Un poco más grande para mejor lectura en esta fuente */
+            line-height: 1.8;
+            color: #ffffff; /* Blanco absoluto */
+            font-weight: 400;
+            letter-spacing: 0.2px;
+        }
+
+        .paragraph-editorial p {
+            margin-bottom: 25px;
+        }
+
+        /* ETIQUETAS DE FASES */
+        .phase-tag {
+            font-family: 'Playfair Display', serif;
+            font-style: italic;
+            font-size: 1.2rem;
+            color: #ffffff;
+            margin-bottom: 20px;
+            display: inline-block;
+            border-bottom: 1px solid #ffffff;
+            padding-bottom: 6px;
+        }
+
+        /* CONTENEDORES DE IMÁGENES */
+        .img-wrapper {
+            background-color: #0a0a0a;
+            border-radius: 16px;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+        }
+
+        .img-wrapper img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        /* ========================================================
+           01. SECCIÓN HERO
+           ======================================================== */
+        .hero-section {
+            height: 65vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            background-color: #000000;
+            color: #ffffff;
+            margin-bottom: 120px;
+            padding: 40px;
+        }
+
+        .hero-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 8.5rem;
+            font-weight: 400;
+            letter-spacing: -4px;
+            line-height: 0.9;
+            margin-bottom: 25px;
+        }
+
+        .hero-subtitle {
+            font-family: 'Playfair Display', serif;
+            font-style: italic;
+            font-size: 2.2rem;
+            color: #ffffff;
+        }
+
+        /* Adaptación móvil */
+        @media (max-width: 768px) {
+            .hero-title { font-size: 4.5rem; letter-spacing: -2px; }
+            .section-title-editorial { font-size: 2.8rem; }
+            .hero-subtitle { font-size: 1.5rem; }
+        }
+
+        /* ========================================================
+           02. INTRODUCCIÓN
+           ======================================================== */
+        .intro-section {
+            max-width: 850px;
+            margin: 0 auto 160px auto;
+            text-align: center;
+        }
+
+        .intro-section .paragraph-editorial {
+            font-size: 1.5rem;
+            line-height: 1.8;
+        }
+
+/* ========================================================
+           03. PANEL GENERAL (CORREGIDO: 100% COMPLETO SIN RECORTAR)
+           ======================================================== */
+        .panel-section {
+            width: 100vw;
+            margin-left: calc(-50vw + 50%);
+            margin-bottom: 160px;
+            padding: 0 40px;
+        }
+
+        .panel-section .img-wrapper {
+            height: auto; /* Quitamos la altura fija para que no recorte */
+            background-color: transparent; /* Fondo limpio */
+            border-radius: 0px; /* Sin bordes redondeados para que actúe como panel completo si lo deseas, o déjalo en 24px */
+        }
+
+        .panel-section .img-wrapper img {
+            width: 100%;
+            height: auto; /* Fuerza a la imagen a mantener su proporción real */
+            object-fit: contain; /* Garantiza que se muestre TODO el panel sin perder un solo píxel */
+        }
+        /* ========================================================
+           04. PROCESO (GRID ASIMÉTRICO)
+           ======================================================== */
+        .proceso-header {
+            max-width: 750px;
+            margin-bottom: 100px;
+        }
+
+        .grid-fases {
+            display: flex;
+            flex-direction: column;
+            gap: 140px;
+            margin-bottom: 160px;
+        }
+
+        .fase-row {
+            display: grid;
+            grid-template-columns: 1.2fr 1fr;
+            gap: 80px;
+            align-items: center;
+        }
+
+        .fase-row.reverse {
+            grid-template-columns: 1fr 1.2fr;
+        }
+
+        .images-parallel {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 24px;
+        }
+
+        .images-parallel .img-wrapper {
+            height: 480px;
+        }
+
+        .fase-full-width .img-wrapper {
+            height: 650px;
+            margin-bottom: 40px;
+            border-radius: 24px;
+        }
+
+        .fase-full-width .text-side {
+            max-width: 700px;
+        }
+
+        /* ========================================================
+           05. RESULTADO FINAL (MOSAICO)
+           ======================================================== */
+        .resultado-section {
+            margin-bottom: 160px;
+        }
+
+        .gallery-mosaic {
+            display: grid;
+            grid-template-columns: repeat(12, 1fr);
+            gap: 24px;
+            margin-bottom: 50px;
+        }
+
+        .gallery-item.large { grid-column: span 8; height: 600px; }
+        .gallery-item.vertical { grid-column: span 4; height: 600px; }
+        .gallery-item.wide { grid-column: span 12; height: 550px; }
+
+        /* ========================================================
+           06. SISTEMA CONSTRUCTIVO
+           ======================================================== */
+        .anatomy-section {
+            margin-bottom: 100px;
+            border-top: 1px solid #222222;
+            padding-top: 100px;
+        }
+
+        .blueprint-lamina {
+            display: grid;
+            grid-template-columns: repeat(12, 1fr);
+            gap: 24px;
+        }
+
+        .blueprint-item {
+            position: relative;
+        }
+
+        .bp-planta { grid-column: span 4; height: 380px; }
+        .bp-alzado { grid-column: span 4; height: 380px; }
+        .bp-secciones { grid-column: span 4; height: 380px; }
+        .bp-detalles { grid-column: span 5; height: 480px; }
+        .bp-axonometria { grid-column: span 7; height: 480px; }
+
+        .blueprint-label {
+            position: absolute;
+            bottom: 20px;
+            left: 20px;
+            background-color: rgba(0, 0, 0, 0.85);
+            padding: 6px 12px;
+            font-size: 12px;
+            text-transform: uppercase;
+            color: #ffffff;
+            border-radius: 4px;
+            font-family: 'Playfair Display', serif;
+            font-style: italic;
+            border: 1px solid #333333;
+        }
+
+        .anatomy-section .paragraph-editorial {
+            max-width: 750px;
+            margin-top: 50px;
+        }
+
+        /* ========================================================
+           EFECTO LUPA
+           ======================================================== */
+        img.con-lupa {
+            transition: transform 0.15s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            cursor: zoom-in;
+            will-change: transform, transform-origin;
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 1024px) {
+            .fase-row, .fase-row.reverse { grid-template-columns: 1fr; gap: 40px; }
+            .images-parallel .img-wrapper { height: 350px; }
+            .gallery-item.large, .gallery-item.vertical, .gallery-item.wide { grid-column: span 12; height: 450px; }
+            .bp-planta, .bp-alzado, .bp-secciones, .bp-detalles, .bp-axonometria { grid-column: span 12; height: 380px; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="top-nav">
+        <div>ARCHITECTURAL DESIGNE ARCHIVE - CELINA PÉREZ HORTA </div>
+        <a href="index.html" class="back-link">← VOLVER AL ESPACIO </a>
+    </nav>
+
+    <main class="container">
+
+        <section class="hero-section">
+            <h1 class="hero-title">Vaya Tela!</h1>
+            <p class="hero-subtitle">Entre bastidores, un lugar para respirar.</p>
+        </section>
+
+        <section class="intro-section">
+            <div class="paragraph-editorial">
+                <p>La arquitectura también puede nacer de los momentos más cotidianos. En este caso, el punto de partida no fue un gran edificio ni un espacio monumental, sino una pausa. Mientras el flujo constante de personas define el ritmo de la cafetería, existe un pequeño instante en el que quienes hacen posible ese funcionamiento necesitan detenerse.</p>
+                <p>Nuestra propuesta convierte ese momento en un lugar.</p>
+                <p>Situado junto a la salida utilizada por los trabajadores durante sus descansos, el proyecto transforma un espacio residual en un refugio temporal. No busca aislar completamente a quien lo ocupa, sino ofrecer un cambio de atmósfera: un espacio donde el ruido se atenúa, la luz se filtra y el tiempo parece ralentizarse.</p>
+                <p>La estructura combina madera, acero y tejido para construir un sistema ligero capaz de envolver sin cerrar. Las telas tensadas generan distintas capas de transparencia que protegen visualmente el interior mientras permiten que el aire y la luz atraviesen la instalación. Más que definir un límite físico, crean una sensación de cobijo.</p>
+                <p>El proyecto entiende el descanso como una necesidad espacial. Un lugar donde conversar, respirar o simplemente permanecer unos minutos antes de volver al trabajo. Una arquitectura mínima que demuestra que, en ocasiones, los espacios más pequeños son los que tienen mayor capacidad para mejorar la experiencia cotidiana.</p>
+            </div>
+        </section>
+
+        <section class="panel-section">
+            <div class="img-wrapper">
+                <img src="vayatela-panel-completo.jpg" class="con-lupa" alt="Panel general del proyecto Vaya Tela">
+            </div>
+        </section>
+
+        <section class="proceso-section">
+            <div class="proceso-header">
+                <h2 class="section-title-editorial">Del dibujo a la materia</h2>
+                <p class="section-subtitle-editorial">Toda idea necesita enfrentarse a la realidad para comprobar su verdadera capacidad de construir espacio.</p>
+                <div class="paragraph-editorial">
+                    <p>Toda idea necesita enfrentarse a la realidad para comprobar su verdadera capacidad de construir espacio. Este proyecto fue desarrollado íntegramente por el equipo, desde el diseño conceptual hasta la fabricación de cada una de las piezas, permitiendo entender el proceso constructivo como una parte inseparable de la propia arquitectura.</p>
+                </div>
+            </div>
+
+            <div class="grid-fases">
+                <div class="fase-row">
+                    <div class="images-parallel">
+                        <div class="img-wrapper"><img src="fase1-a.jpg" alt="Producción material 1"></div>
+                        <div class="img-wrapper"><img src="fase1-b.jpg" alt="Producción material 2"></div>
+                    </div>
+                    <div class="text-side">
+                        <span class="phase-tag">Fase 01 · Producción material</span>
+                        <div class="paragraph-editorial">
+                            <p>La primera etapa estuvo dedicada a la fabricación de los distintos elementos que componen la estructura. Mientras la madera dio forma al sistema portante principal, el acero permitió resolver las uniones y los puntos de tensión necesarios para soportar la instalación. Cada material fue trabajado de manera independiente antes de comenzar el ensamblaje, entendiendo sus posibilidades y limitaciones a través del proceso manual.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="fase-row reverse">
+                    <div class="text-side">
+                        <span class="phase-tag">Fase 02 · Montaje y ensayos</span>
+                        <div class="paragraph-editorial">
+                            <p>Con todas las piezas construidas comenzó el proceso de montaje. La estructura fue levantada y ajustada progresivamente, comprobando su estabilidad y verificando el comportamiento de las telas mediante diferentes ensayos de tensión. Esta fase permitió corregir pequeñas variaciones y entender cómo la instalación respondía tanto estructuralmente como espacialmente.</p>
+                        </div>
+                    </div>
+                    <div class="images-parallel">
+                        <div class="img-wrapper"><img src="fase2-a.jpg" alt="Montaje ensayos 1"></div>
+                        <div class="img-wrapper"><img src="fase2-b.jpg" alt="Montaje ensayos 2"></div>
+                    </div>
+                </div>
+
+                <div class="fase-full-width">
+                    <span class="phase-tag">Fase 03 · Construcción final</span>
+                    <div class="img-wrapper">
+                        <img src="fase3-grande.jpg" alt="Fotografía del montaje terminado">
+                    </div>
+                    <div class="text-side">
+                        <div class="paragraph-editorial">
+                            <p>Tras los ajustes realizados durante las pruebas, la instalación alcanzó su configuración definitiva. La estructura de madera, los elementos metálicos y el sistema textil comenzaron a trabajar conjuntamente hasta conformar un espacio ligero, permeable y estable, donde cada componente cumple una función tanto constructiva como ambiental.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="resultado-section">
+            <h2 class="section-title-editorial">El espacio construido</h2>
+            <p class="section-subtitle-editorial">Atmósfera, luz y habitabilidad efímera</p>
+
+            <div class="gallery-mosaic">
+                <div class="gallery-item large img-wrapper">
+                    <img src="resultado1.jpg" alt="Resultado final espacio exterior">
+                </div>
+                <div class="gallery-item vertical img-wrapper">
+                    <img src="resultado2.jpg" alt="Detalle de las transparencias">
+                </div>
+                <div class="gallery-item wide img-wrapper">
+                    <img src="resultado3.jpg" alt="Vista panorámica interior">
+                </div>
+            </div>
+
+            <div class="paragraph-editorial" style="max-width: 850px;">
+                <p>La instalación no pretende imponerse sobre el entorno, sino generar una atmósfera distinta dentro de él. Desde el exterior aparece como una estructura ligera que despierta curiosidad; desde el interior, las telas transforman la percepción del espacio mediante filtros de luz, transparencias y movimiento.</p>
+                <p>El sonido se vuelve más tenue, la sombra adquiere protagonismo y el espacio invita a detenerse. La arquitectura deja de entenderse únicamente como una cuestión de forma para convertirse en una experiencia sensorial donde materiales, luz y tiempo construyen un pequeño refugio para el descanso.</p>
+            </div>
+        </section>
+
+        <section class="anatomy-section">
+            <h2 class="section-title-editorial">Anatomía del proyecto</h2>
+            <p class="section-subtitle-editorial">Documentación técnica de concurso</p>
+
+            <div class="blueprint-lamina">
+                <div class="blueprint-item bp-planta img-wrapper">
+                    <img src="planta.jpg" class="con-lupa" alt="Plano de Planta">
+                    <div class="blueprint-label">Planta</div>
+                </div>
+                <div class="blueprint-item bp-alzado img-wrapper">
+                    <img src="alzado.jpg" class="con-lupa" alt="Plano de Alzado">
+                    <div class="blueprint-label">Alzado</div>
+                </div>
+                <div class="blueprint-item bp-secciones img-wrapper">
+                    <img src="secciones.jpg" class="con-lupa" alt="Plano de Secciones">
+                    <div class="blueprint-label">Secciones</div>
+                </div>
+                <div class="blueprint-item bp-detalles img-wrapper">
+                    <img src="detalles.jpg" class="con-lupa" alt="Detalles Constructivos">
+                    <div class="blueprint-label">Detalles</div>
+                </div>
+                <div class="blueprint-item bp-axonometria img-wrapper">
+                    <img src="axonometria.jpg" class="con-lupa" alt="Axonometría explotada">
+                    <div class="blueprint-label">Axonometría</div>
+                </div>
+            </div>
+
+            <div class="paragraph-editorial" style="margin-top: 50px;">
+                <p>Más allá del resultado final, el proyecto se desarrolla mediante un sistema constructivo pensado para ser comprendido y fabricado. Plantas, secciones, alzados y detalles muestran cómo una idea inicial evoluciona hasta convertirse en una estructura real, donde cada unión, cada pieza y cada tensión responden tanto a una necesidad técnica como a la intención de construir un espacio habitable.</p>
+            </div>
+        </section>
+
+    </main>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const imagesWithZoom = document.querySelectorAll('img.con-lupa');
+            
+            imagesWithZoom.forEach(img => {
+                img.addEventListener('mousemove', (e) => {
+                    const rect = e.target.getBoundingClientRect();
+                    const x = ((e.clientX - rect.left) / rect.width) * 100;
+                    const y = ((e.clientY - rect.top) / rect.height) * 100;
+                    
+                    img.style.transformOrigin = `${x}% ${y}%`;
+                    img.style.transform = 'scale(2)';
+                });
+
+                img.addEventListener('mouseleave', () => {
+                    img.style.transform = 'scale(1)';
+                    img.style.transformOrigin = 'center center';
+                });
+            });
+        });
+    </script>
+</body>
+</html>

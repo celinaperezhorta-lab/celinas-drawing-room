@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kage no Niwa | Celina Pérez Horta</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+    
+    <style>
+        /* ========================================================
+           ESTILOS BASE - ESTÉTICA EDITORIAL JAPONESA (BLACK & WHITE)
+           ======================================================== */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: #000000;
+            color: #ffffff;
+            font-family: 'Playfair Display', serif;
+            padding: 30px 40px;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* CABECERA SUPERIOR REESTRUCTURADA */
+        .top-nav {
+            width: 100%;
+            max-width: 100%;
+            margin: 0 auto 120px auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-family: 'Inter', sans-serif;
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            padding-bottom: 20px;
+        }
+
+        .brand-zone {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 500;
+            opacity: 0.9;
+        }
+
+        .star-icon {
+            font-size: 14px;
+        }
+
+        .back-link {
+            text-decoration: none;
+            color: #ffffff;
+            transition: opacity 0.3s ease;
+            font-weight: 500;
+        }
+
+        .back-link:hover {
+            opacity: 0.5;
+        }
+
+        /* CONTENEDOR FLUIDO */
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        /* TÍTULOS Y TEXTOS EDITORIALES */
+        .section-title-editorial {
+            font-size: 4.5rem;
+            font-weight: 400;
+            letter-spacing: -2px;
+            margin-bottom: 25px;
+            line-height: 1.1;
+        }
+
+        .paragraph-editorial {
+            font-size: 1.35rem;
+            line-height: 1.8;
+            font-weight: 400;
+            letter-spacing: 0.2px;
+        }
+
+        .paragraph-editorial p {
+            margin-bottom: 25px;
+        }
+
+        /* CONTENEDORES DE IMÁGENES (SISTEMA INTEGRAL SIN RECORTE) */
+        .img-wrapper {
+            background-color: #000000;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            margin-bottom: 40px;
+        }
+
+        .img-wrapper img {
+            width: 100%;
+            height: auto;
+            display: block;
+            object-fit: contain;
+        }
+
+        /* SOLUCIÓN CENTRADO PLANTA GENERAL AMPLILADA */
+        .planta-general-wrapper {
+            width: 100%;
+            max-width: 1400px;
+            margin: 0 auto 60px auto;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+        }
+
+        /* ========================================================
+           01. HERO (ENCABEZADO CENTRADO CHULO)
+           ======================================================== */
+        .hero-section {
+            text-align: center;
+            margin-bottom: 180px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            padding-bottom: 100px;
+        }
+
+        .hero-title {
+            font-size: 8.5rem;
+            font-weight: 400;
+            letter-spacing: -4px;
+            line-height: 1;
+            margin-bottom: 25px;
+        }
+
+        .hero-subtitle {
+            font-style: italic;
+            font-size: 2.8rem;
+            opacity: 0.8;
+            margin-bottom: 70px;
+        }
+
+        .intro-text-hero {
+            max-width: 850px;
+            margin: 0 auto;
+            text-align: left;
+        }
+
+        /* 02. MANIFIESTO (BLOQUE CENTRAL) */
+        .manifesto-section {
+            max-width: 950px;
+            margin: 0 auto 180px auto;
+            text-align: center;
+            padding: 60px 0;
+        }
+
+        .manifesto-title {
+            font-size: 3rem;
+            font-style: italic;
+            margin-bottom: 40px;
+        }
+
+        /* 03. PANEL GENERAL (ANCHO COMPLETO) */
+        .panel-section {
+            width: 100vw;
+            margin-left: calc(-50vw + 50%);
+            margin-bottom: 180px;
+            padding: 0 40px;
+        }
+
+        /* ESTRUCTURAS DE PILAS VERTICALES */
+        .bloque-editorial {
+            margin-bottom: 180px;
+        }
+
+        .vertical-blueprint-stack {
+            display: flex;
+            flex-direction: column;
+            gap: 140px; 
+            margin-bottom: 60px;
+        }
+
+        .centered-text-block {
+            max-width: 850px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        /* 09. EPÍLOGO */
+        .epilogue-section {
+            height: 90vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+
+        .epilogue-text {
+            font-size: 2.4rem;
+            font-style: italic;
+            max-width: 750px;
+            opacity: 0.9;
+            line-height: 1.4;
+        }
+
+        /* EFECTO LUPA */
+        img.con-lupa {
+            transition: transform 0.15s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            cursor: zoom-in;
+            will-change: transform, transform-origin;
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 1024px) {
+            body { padding: 20px 20px; }
+            .hero-title { font-size: 4.5rem; letter-spacing: -2px; }
+            .section-title-editorial { font-size: 2.8rem; }
+            .hero-subtitle { font-size: 1.8rem; }
+            .panel-section { padding: 0 20px; }
+            .vertical-blueprint-stack { gap: 80px; }
+            .top-nav { flex-direction: column; gap: 15px; text-align: center; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="top-nav">
+        <div class="brand-zone">
+            <span class="star-icon">✦</span> ARCHITECTURAL DESIGN ARCHIVE - CELINA PÉREZ HORTA
+        </div>
+        <a href="index.html" class="back-link">← VOLVER AL ESPACIO</a>
+    </nav>
+
+    <main class="container">
+
+        <section class="hero-section">
+            <h1 class="hero-title">Kage no Niwa</h1>
+            <p class="hero-subtitle">El jardín de las sombras.</p>
+            <div class="paragraph-editorial intro-text-hero">
+                <p>Kage no Niwa nace como un refugio frente al ritmo acelerado de la ciudad. Inspirado en la tradición del jardín japonés, el proyecto propone un paisaje donde naturaleza, arquitectura y agua construyen una experiencia basada en la contemplación. No se trata únicamente de diseñar un parque, sino de crear una secuencia de espacios donde cada recorrido, cada estación y cada cambio de luz transforman la percepción del visitante. El jardín no busca imponerse al entorno; invita a descubrirlo lentamente.</p>
+            </div>
+        </section>
+
+        <section class="manifesto-section">
+            <h2 class="manifesto-title">El manifiesto</h2>
+            <div class="paragraph-editorial">
+                <p>En la tradición japonesa, el jardín nunca es un objeto terminado. Es un paisaje que cambia con el tiempo, donde la naturaleza se convierte en la verdadera autora del proyecto. Kage no Niwa traslada esa filosofía a un contexto urbano, construyendo un lugar donde el paso de las estaciones modifica continuamente la experiencia del espacio. La floración, la sombra, el sonido del agua y el crecimiento de la vegetación forman parte de una arquitectura que nunca permanece igual. El visitante no observa el jardín; lo recorre, lo habita y lo descubre poco a poco.</p>
+            </div>
+        </section>
+
+    
+        </section>
+
+        <section class="bloque-editorial">
+            <h2 class="section-title-editorial" style="text-align: center; margin-bottom: 60px;">El jardín</h2>
+            <div class="planta-general-wrapper">
+                <img src="kagenoniwa-planta-general.png" class="con-lupa" style="width: 100%; height: auto;" alt="Planta general del jardín">
+            </div>
+            <div class="paragraph-editorial centered-text-block">
+                <p>El jardín se organiza como una sucesión de landscapes conectados mediante recorridos sinuosos. Cada espacio posee una identidad propia, pero todos forman parte de un mismo recorrido continuo donde el visitante nunca percebe el conjunto de una sola vez.</p>
+            </div>
+        </section>
+
+        <section class="bloque-editorial">
+            <h2 class="section-title-editorial" style="margin-bottom: 80px;">El paso de las estaciones</h2>
+            <div class="vertical-blueprint-stack">
+                <div class="img-wrapper"><img src="kagenoniwa-primavera.png" class="con-lupa" alt="Planta Primavera"></div>
+                <div class="img-wrapper"><img src="kagenoniwa-verano.png" class="con-lupa" alt="Planta Verano"></div>
+            
+            </div>
+            <div class="paragraph-editorial centered-text-block">
+                <p>El proyecto cambia junto con el paisaje. La vegetación modifica el color, la densidad y la atmósfera del jardín a lo largo del año, haciendo que un mismo recorrido pueda vivirse de formas completamente distintas según la estación.</p>
+            </div>
+        </section>
+
+        <section class="bloque-editorial">
+            <h2 class="section-title-editorial">Emplazamiento</h2>
+            <div class="img-wrapper" style="padding: 80px; background-color: #050505;">
+                <img src="kagenoniwa-situacion.png" class="con-lupa" alt="Plano de situación urbana en Madrid">
+            </div>
+            <div class="paragraph-editorial">
+                <p>Situado en el tejido urbano de Madrid, el jardín aparece como una pausa dentro de la ciudad. El proyecto establece un contraste entre el ritmo urbano y la calma del paisaje, construyendo un espacio donde el tiempo parece ralentizarse.</p>
+            </div>
+        </section>
+
+        <section class="bloque-editorial">
+            <h2 class="section-title-editorial" style="text-align: right; margin-bottom: 80px;">El recorrido</h2>
+            <div class="vertical-blueprint-stack">
+                <div class="img-wrapper"><img src="kagenoniwa-seccion-1.png" class="con-lupa" alt="Sección longitudinal 1"></div>
+                <div class="img-wrapper"><img src="kagenoniwa-seccion-2.png" class="con-lupa" alt="Sección longitudinal 2"></div>
+            </div>
+            <div class="paragraph-editorial" style="max-width: 850px;">
+                <p>Las secciones permiten comprender el jardín como una experiencia espacial. Los cambios de cota, el agua, la vegetación y las arquitecturas tradicionales construyen una secuencia continua de compresiones y aperturas donde cada recorrido descubre nuevas perspectivas del paisaje.</p>
+            </div>
+        </section>
+
+        <section class="bloque-editorial">
+            <h2 class="section-title-editorial">La experiencia</h2>
+            <div class="vertical-blueprint-stack">
+                <div class="img-wrapper"><img src="kagenoniwa-render-aereo.png" class="con-lupa" alt="Vista aérea renderizada"></div>
+                <div class="img-wrapper"><img src="kagenoniwa-render-casa.png" class="con-lupa" alt="Detalle casa japonesa"></div>
+            </div>
+            <div class="paragraph-editorial" style="max-width: 650px; margin-top: 40px;">
+                <p>Más que representar un lugar, las imágenes muestran una atmósfera. La luz filtrándose entre los árboles, el sonido del agua, la floración de los cerezos y el silencio del jardín construyen una experiencia donde naturaleza y arquitectura dejan de entenderse como elementos separados.</p>
+            </div>
+        </section>
+<section class="bloque-editorial" style="margin-bottom: 120px;">
+            <h2 class="section-title-editorial" style="text-align: left; margin-bottom: 60px;">Panel final</h2>
+            <div class="img-wrapper" style="border: 1px solid #ffffff; padding: 25px; background-color: #000000; width: 100%; max-width: 1400px; margin: 0 auto;">
+                <img src="kagenoniwa-panel-final.png" class="con-lupa" alt="Panel final completo de Kage no Niwa">
+            </div>
+        </section>
+        <section class="epilogue-section">
+            <div class="epilogue-text">
+                <p>Un jardín nunca termina de construirse. Es el tiempo quien completa la arquitectura.</p>
+            </div>
+        </section>
+
+    </main>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const imagesWithZoom = document.querySelectorAll('img.con-lupa');
+            
+            imagesWithZoom.forEach(img => {
+                img.addEventListener('mousemove', (e) => {
+                    const rect = e.target.getBoundingClientRect();
+                    const x = ((e.clientX - rect.left) / rect.width) * 100;
+                    const y = ((e.clientY - rect.top) / rect.height) * 100;
+                    
+                    img.style.transformOrigin = `${x}% ${y}%`;
+                    img.style.transform = 'scale(2.3)';
+                });
+
+                img.addEventListener('mouseleave', () => {
+                    img.style.transform = 'scale(1)';
+                    img.style.transformOrigin = 'center center';
+                });
+            });
+        });
+    </script>
+</body>
+</html>

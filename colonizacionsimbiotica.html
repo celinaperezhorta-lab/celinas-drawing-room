@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Colonización Simbiótica | Celina Pérez Horta</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap" rel="stylesheet">
+    
+    <style>
+        /* ========================================================
+           ESTILOS BASE - RITMO EDITORIAL ASIMÉTRICO
+           ======================================================== */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: #000000;
+            color: #ffffff;
+            font-family: 'Playfair Display', serif;
+            padding: 40px 20px;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* ANIMACIÓN DE LA ESTRELLA */
+        @keyframes sutilParpadeo {
+            0% { opacity: 0; transform: scale(0.8); }
+            100% { opacity: 1; transform: scale(1); }
+        }
+
+        /* CABECERA MINIMALISTA */
+        .top-nav {
+            max-width: 1400px;
+            margin: 0 auto 100px auto;
+            display: flex;
+            justify-content: space-between;
+            font-size: 14px;
+        }
+
+        .brand-zone {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .star-icon {
+            animation: sutilParpadeo 1.5s ease-in-out forwards;
+        }
+
+        .back-link {
+            text-decoration: none;
+            color: #ffffff;
+            transition: opacity 0.3s;
+        }
+
+        .back-link:hover {
+            opacity: 0.6;
+        }
+
+        /* CONTENEDOR FLUIDO */
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        /* TÍTULOS Y SUBTÍTULOS EDITORIALES */
+        .section-title-editorial {
+            font-size: 4.5rem;
+            font-weight: 400;
+            letter-spacing: -2px;
+            margin-bottom: 15px;
+            line-height: 1.1;
+        }
+
+        .section-subtitle-editorial {
+            font-style: italic;
+            font-size: 1.8rem;
+            margin-bottom: 40px;
+            font-weight: 400;
+            opacity: 0.85;
+        }
+
+        /* PÁRRAFOS EXPLICATIVOS */
+        .paragraph-editorial {
+            font-size: 1.35rem;
+            line-height: 1.8;
+            font-weight: 400;
+            letter-spacing: 0.2px;
+        }
+
+        .paragraph-editorial p {
+            margin-bottom: 25px;
+        }
+
+        /* CONTENEDORES DE IMÁGENES (SIN RECORTES) */
+        .img-wrapper {
+            background-color: #000000;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+        }
+
+        .img-wrapper img {
+            width: 100%;
+            height: auto;
+            display: block;
+            object-fit: contain;
+        }
+
+        /* ========================================================
+           01. HERO (VAYA TELA STYLE)
+           ======================================================== */
+        .hero-section {
+            height: 70vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            margin-bottom: 140px;
+        }
+
+        .hero-title {
+            font-size: 7.5rem;
+            font-weight: 400;
+            letter-spacing: -3px;
+            line-height: 1;
+            margin-bottom: 25px;
+        }
+
+        .hero-subtitle {
+            font-style: italic;
+            font-size: 2.2rem;
+            opacity: 0.8;
+        }
+
+        /* 02. INTRODUCCIÓN CORTA CÉNTRICA */
+        .intro-section {
+            max-width: 850px;
+            margin: 0 auto 160px auto;
+            text-align: center;
+        }
+
+        /* ========================================================
+           03. PANEL GENERAL (INMERSIVO, PANTALLA COMPLETA)
+           ======================================================== */
+        .panel-section {
+            width: 100vw;
+            margin-left: calc(-50vw + 50%);
+            margin-bottom: 160px;
+            padding: 0 40px;
+        }
+
+        /* ========================================================
+           ESTRUCTURAS ASIMÉTRICAS (GRID FLUIDO)
+           ======================================================== */
+        .bloque-editorial {
+            margin-bottom: 160px;
+        }
+
+        /* Combinaciones de 2 columnas desiguales */
+        .fase-row {
+            display: grid;
+            grid-template-columns: 1.2fr 1fr;
+            gap: 80px;
+            align-items: center;
+        }
+
+        .fase-row.reverse {
+            grid-template-columns: 1fr 1.2fr;
+        }
+
+        /* Paralelos técnicos de dos imágenes a la par */
+        .images-parallel {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 32px;
+            margin-bottom: 40px;
+        }
+
+        /* Pilas verticales limpias para planos */
+        .vertical-blueprint-stack {
+            display: flex;
+            flex-direction: column;
+            gap: 100px;
+            margin-bottom: 50px;
+            padding: 40px 0;
+        }
+
+        .text-side-contained {
+            max-width: 650px;
+        }
+
+        /* EFECTO LUPA */
+        img.con-lupa {
+            transition: transform 0.15s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            cursor: zoom-in;
+            will-change: transform, transform-origin;
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 1024px) {
+            .hero-title { font-size: 3.8rem; }
+            .section-title-editorial { font-size: 2.8rem; }
+            .hero-subtitle { font-size: 1.6rem; }
+            .fase-row, .fase-row.reverse { grid-template-columns: 1fr; gap: 40px; }
+            .images-parallel { grid-template-columns: 1fr; gap: 24px; }
+            .panel-section { padding: 0 20px; }
+            .vertical-blueprint-stack { gap: 60px; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="top-nav">
+        <div class="brand-zone">
+            <span class="star-icon">✦</span> ARCHITECTURAL DESIGNE ARCHIVE - CELINA PÉREZ HORTA
+        </div>
+        <a href="index.html" class="back-link">← VOLVER AL ESPACIO </a>
+    </nav>
+
+    <main class="container">
+
+        <section class="hero-section">
+            <h1 class="hero-title">Colonización Simbiótica</h1>
+            <p class="hero-subtitle">Una arquitectura que aprende a crecer.</p>
+        </section>
+
+        <section class="intro-section">
+            <div class="paragraph-editorial">
+                <p>La arquitectura siempre ha sido entendida como una materia inerte, un objeto terminado cuya forma permanece inalterable con el paso del tiempo. Este proyecto plantea precisamente lo contrario: una estructura capaz de evolucionar, adaptarse y crecer junto a los organismos que la habitan.</p>
+                <p>Colonización Simbiótica imagina una arquitectura donde el edificio deja de ser un límite entre naturaleza y tecnología para convertirse en un ecosistema compartido. Las algas dejan de ser un elemento añadido y pasan a formar parte de la propia construcción, modificando su comportamiento, su apariencia y su rendimiento ambiental.</p>
+                <p>El proyecto propone un edificio que respira, captura carbono, produce biomasa y transforma continuamente su propia envolvente. No se trata de diseñar una forma definitiva, sino de crear las condiciones necesarias para que la vida continúe construyéndola.</p>
+            </div>
+        </section>
+
+        <section class="panel-section">
+            <div class="img-wrapper">
+                <img src="ideadeproyecto.jpg" class="con-lupa" alt="idea de proyecto">
+            </div>
+        </section>
+
+        <section class="bloque-editorial">
+            <div class="fase-row">
+                <div class="img-wrapper">
+                    <img src="mecanismo-colonizacion.jpg" class="con-lupa" alt="Mecanismo de colonización">
+                </div>
+                <div class="text-side-contained">
+                    <h2 class="section-title-editorial">Mecanismo de crecimiento</h2>
+                    <div class="paragraph-editorial">
+                        <p>El edificio no impone una forma sobre la naturaleza; crea una infraestructura preparada para ser colonizada. La estructura actúa como soporte, las algas como materia viva y el tiempo como el verdadero arquitecto del proyecto.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="bloque-editorial">
+            <h2 class="section-title-editorial">Desarrollo del organismo</h2>
+            <p class="section-subtitle-editorial">Evolución cromática y biológica de la envolvente activa</p>
+            
+            <div class="images-parallel">
+                <div class="img-wrapper"><img src="render-evolucion-1.jpg" class="con-lupa" alt="Fase evolutiva inicial"></div>
+                <div class="img-wrapper"><img src="render-evolucion-2.jpg" class="con-lupa" alt="Fase evolutiva avanzada"></div>
+            </div>
+            
+            <div class="img-wrapper" style="margin-bottom: 40px;">
+                <img src="axonometria-desarrollo.jpg" class="con-lupa" alt="Axonometría explotada del crecimiento">
+            </div>
+
+            <div class="paragraph-editorial" style="max-width: 850px;">
+                <p>La estructura no representa el resultado final, sino el inicio de un proceso continuo de transformación. Con el paso del tiempo, la materia biológica modifica la envolvente del edificio hasta convertirla en una piel activa capaz de producir sombra, capturar carbono y regular el comportamiento ambiental del conjunto.</p>
+            </div>
+        </section>
+
+        <section class="bloque-editorial">
+            <div class="fase-row reverse">
+                <div class="text-side-contained">
+                    <h2 class="section-title-editorial">Implazamiento</h2>
+                    <div class="paragraph-editorial">
+                        <p>El proyecto se implanta como una nueva infraestructura biológica dentro de la ciudad, estableciendo una relación directa entre el sistema construido y el paisaje que lo rodea.</p>
+                    </div>
+                </div>
+                <div class="images-parallel" style="margin-bottom: 0;">
+                    <div class="img-wrapper"><img src="plano-situacion.jpg" class="con-lupa" alt="Plano de situación"></div>
+                    <div class="img-wrapper"><img src="plano-emplacement.jpg" class="con-lupa" alt="Plano de emplazamiento"></div>
+                </div>
+            </div>
+        </section>
+
+        <section class="bloque-editorial">
+            <h2 class="section-title-editorial">Organización espacial</h2>
+            <p class="section-subtitle-editorial">Análisis programático del sistema metabólico central</p>
+
+            <div class="vertical-blueprint-stack">
+                <div class="img-wrapper"><img src="planta-cubierta.jpg" class="con-lupa" alt="Planta cubierta"></div>
+                <div class="img-wrapper"><img src="planta-baja.jpg" class="con-lupa" alt="Planta Baja"></div>
+                <div class="img-wrapper"><img src="plantas 3.jpg" class="con-lupa" alt="Plantas 3"></div>
+                <div class="img-wrapper"><img src="plantas 4.jpg" class="con-lupa" alt="Plantas 4"></div>
+                <div class="img-wrapper"><img src="planta-sotano.jpg" class="con-lupa" alt="Planta Técnica"></div>
+            </div>
+
+            <div class="paragraph-editorial" style="max-width: 850px; margin: 0 auto; text-align: center;">
+                <p>Toda la organización del edificio gira en torno a un gran núcleo biotecnológico central, donde se desarrolla el metabolismo del proyecto. Los espacios habitables se distribuyen alrededor de este vacío, permitiendo que la actividad humana conviva con los procesos biológicos que mantienen vivo el edificio.</p>
+            </div>
+        </section>
+
+        <section class="bloque-editorial" style="border-top: 1px solid #111; padding-top: 100px;">
+            <h2 class="section-title-editorial">Sistema estructural</h2>
+            
+            <div class="vertical-blueprint-stack" style="padding: 40px 60px;">
+                <div class="img-wrapper"><img src="alzado.jpg" class="con-lupa" alt="Alzado"></div>
+                <div class="img-wrapper"><img src="seccion-longitudinal.jpg" class="con-lupa" alt="Sección Longitudinal"></div>
+            
+            </div>
+
+            <div class="paragraph-editorial" style="max-width: 850px;">
+                <p>La estructura exterior actúa como un exoesqueleto capaz de soportar tanto las cargas del edificio como el crecimiento progresivo de la biomasa. Cada elemento constructivo responde simultáneamente a necesidades estructurales, ambientales y biológicas.</p>
+            </div>
+        </section>
+
+        <section class="panel-section" style="margin-top: 140px; border-top: 1px solid #222; padding-top: 100px;">
+            <h2 class="section-title-editorial" style="text-align: center; margin-bottom: 60px;">PANEL FINAL</h2>
+            
+            <div class="img-wrapper" style="margin-bottom: 60px;">
+                <img src="panel-completo.png" class="con-lupa" alt="Panel de cierre">
+            </div>
+
+            <div class="paragraph-editorial" style="font-style: italic; text-align: center; max-width: 700px; margin: 0 auto; opacity: 0.8;">
+                <p>«La arquitectura ya no termina cuando finaliza la obra. Comienza cuando la vida decide habitarla.»</p>
+            </div>
+        </section>
+
+    </main>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const imagesWithZoom = document.querySelectorAll('img.con-lupa');
+            
+            imagesWithZoom.forEach(img => {
+                img.addEventListener('mousemove', (e) => {
+                    const rect = e.target.getBoundingClientRect();
+                    const x = ((e.clientX - rect.left) / rect.width) * 100;
+                    const y = ((e.clientY - rect.top) / rect.height) * 100;
+                    
+                    img.style.transformOrigin = `${x}% ${y}%`;
+                    img.style.transform = 'scale(2)';
+                });
+
+                img.addEventListener('mouseleave', () => {
+                    img.style.transform = 'scale(1)';
+                    img.style.transformOrigin = 'center center';
+                });
+            });
+        });
+    </script>
+</body>
+</html>
